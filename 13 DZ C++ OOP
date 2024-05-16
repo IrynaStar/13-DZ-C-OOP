@@ -1,0 +1,174 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+class Passport {
+protected:
+	string name;
+	string surname;
+	string nationality;
+	string sex;
+	string dateOfBirth;
+	string individualTaxNumber;
+public:
+
+	void SetName(string name) {
+		this->name = name;
+	}
+	string GetName() const {
+		return name;
+	}
+	void SetSurname(string surname) {
+		this->surname = surname;
+	}
+	string GetSurname() const {
+		return surname;
+	}
+	void SetNationality(string nationality) {
+		this->nationality = nationality;
+	}
+	string GetNationality() const {
+		return nationality;
+	}
+	void SetSex(string sex) {
+		this->sex = sex;
+	}
+	string GetSex() const {
+		return sex;
+	}
+	void SetDateOfBirth(string dateOfBirth) {
+		this->dateOfBirth = dateOfBirth;
+	}
+	string GetDateOfBirth() const {
+		return dateOfBirth;
+	}
+	void SetIndividualTaxNumber(string individualTaxNumber) {
+		this->individualTaxNumber = individualTaxNumber;
+	}
+	string IndividualTaxNumber() const {
+		return individualTaxNumber;
+	}
+	
+	//конструкторы
+	Passport() : Passport("Андрій", "Андрійчук", "України", "Ч", "14.06.2005", "1234567891") {
+		cout << "Passport C-TOR 0 params\n";
+	}
+	
+	Passport(string name, string surname, string nationality, string sex, string dateOfBirth, string individualTaxNumber) {
+		cout << "Passport C-TOR 6 params\n";
+		SetName(name);
+		SetSurname(surname);
+		SetNationality(nationality);
+		SetSex(sex);
+		SetDateOfBirth(dateOfBirth);
+		SetIndividualTaxNumber(individualTaxNumber);
+	}
+
+	~Passport() {
+		cout << "Passport D-TOR\n";
+	}
+
+	void Print() const{
+		cout << "Ім'я: " << name << "\n";
+		cout << "Прізвище: " << surname << "\n";
+		cout << "Громадянство: " << nationality << "\n";
+		cout << "Стать: " << sex << "\n";
+		cout << "Дата народження: " << dateOfBirth << "\n";
+		cout << "РНКПО: " << individualTaxNumber << "\n";
+	}
+
+};
+
+class Visa {
+	string placeAndDateOfIssue;
+	string visaType;
+	string validDate;
+public:
+	Visa() {
+		// ...
+	}
+
+	Visa(string name, string surname, string nationality, string sex,
+		string dateOfBirth, string individualTaxNumber) {
+		// ...
+	}
+
+	Visa(string name, string surname, string nationality, string sex,
+		string dateOfBirth, string individualTaxNumber, string placeAndDateOfIssue, string visaType,
+		string validDate) {
+		// ...
+	}
+
+	~Visa() {
+		// ...
+	}
+};
+
+class InternationalPassport : public Passport {
+private:
+	string countryCode; 
+	string type;
+	string recordNo;
+	vector<Visa> visas;
+
+public:
+	InternationalPassport() : Passport("Антон", "Антонюк", "України", "Ч", "13.06.2001", "1234567896") {
+		cout << "InternationalPassport C-TOR 0 params\n";
+	}
+
+	InternationalPassport(string name, string surname, string nationality, string sex, 
+		string dateOfBirth, string individualTaxNumber) : Passport(name, surname, 
+			nationality, sex, dateOfBirth, individualTaxNumber) {
+		cout << "InternationalPassport C-TOR 6 params\n";
+	}
+
+	InternationalPassport(string name, string surname, string nationality, string sex, 
+		string dateOfBirth, string individualTaxNumber, string countryCode, string type, 
+		string recordNo) : Passport(name, surname, nationality, sex, dateOfBirth, individualTaxNumber) {
+		cout << "InternationalPassport C-TOR 9 params\n";
+		SetCountryCode(countryCode);
+		SetType(type);
+		SetRecordNo(recordNo);
+	}
+	~InternationalPassport() {
+		cout << "InternationalPassport D-TOR\n";
+	}	
+
+	void SetCountryCode(string countryCode) {
+		this->countryCode = countryCode;
+	}
+	string GetCountryCode() const {
+		return countryCode;
+	}
+	void SetType(string type) {
+		this->type = type;
+	}
+	string GetType() const {
+		return type;
+	}
+	void SetRecordNo(string recordNo) {
+		this->recordNo = recordNo;
+	}
+	string GetRecordNo() const {
+		return recordNo;
+	}
+
+	// переопределение метода
+	void Print() const {
+		Passport::Print();
+		cout << countryCode << "\n";
+		cout << type << "\n";
+		cout << recordNo << "\n";
+	}
+};
+
+int main()
+{
+	setlocale(0, "UKR");
+	Passport p; 
+	
+	InternationalPassport i; 
+	
+	Visa v; 
+}
